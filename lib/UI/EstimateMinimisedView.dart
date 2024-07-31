@@ -6,9 +6,9 @@ class MinimizedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Cards("Create Estimates"),
+        Cards(),
       ],
     );
   }

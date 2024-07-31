@@ -48,6 +48,8 @@ class PopulateClassBloc extends Bloc<PopulateClassEvent, PopulateClassState> {
 
     final dynamic estimate = state.estimateData.toJson();
 
+    emit(PopulateClassState(state.estimateData, 0));
+
     final dynamic body={
       "RequestInfo": {
           "apiId": "string",

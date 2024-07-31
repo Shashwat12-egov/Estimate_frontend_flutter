@@ -3,6 +3,7 @@ import 'package:digit_flutter_components/enum/app_enums.dart';
 import 'package:digit_flutter_components/theme/digit_theme.dart';
 import 'package:digit_flutter_components/widgets/atoms/digit_button.dart';
 import 'package:estimate_flutter/BLOC/populateclasses/populate_class_bloc.dart';
+import 'package:estimate_flutter/mapping.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -80,6 +81,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
       bottomNavigationBar: DigitButton(
           label: 'Submit',
           onPressed: () {
+            resetdata();
             context.read <PopulateClassBloc>().add(SendingDatatoBackend());
             AutoRouter.of(context).popUntil((route) => route.isFirst);
           },

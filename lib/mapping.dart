@@ -41,3 +41,29 @@ Map<String, dynamic> globalEstimateDetails = {
   "description": "",
 };
 
+void resetdata() {
+  globalEstimateDetails = {
+    "sorId": "",
+    "name": "",
+    "category": "",
+    "uom": "",
+    "description": "",
+  };
+
+  globalAddress = {
+    "tenantId": "",
+    "doorNo": "",
+    "addressLine1": "",
+    "addressLine2": "",
+    "city": "",
+  };
+
+  globalEstimate = {
+    "tenantId": "",
+    "revisionNumber": "",
+    "businessService": "",
+    "name": "",
+    "referenceNumber": "",
+  };
+
+}

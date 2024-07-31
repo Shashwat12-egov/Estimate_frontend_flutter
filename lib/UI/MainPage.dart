@@ -16,18 +16,7 @@ class MainPageScreen extends StatelessWidget {
             title: const Center(
             child: Text('Estimates',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 253, 252, 252)),)),
           ),
-          body: const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Cards("Create Estimates"),
-                SizedBox(
-                  height: 50,
-                ),
-                Cards("Search Estimates")
-              ],
-            ),
-          )
+          body:Center(child: SingleChildScrollView(child: Cards())),
       );
   }
 }
