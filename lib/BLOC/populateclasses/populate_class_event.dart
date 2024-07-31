@@ -15,4 +15,4 @@ class SavingEstimateDetailsFormData extends PopulateClassEvent {}
 
 class SendingDatatoBackend extends PopulateClassEvent {}
 
-class IsValiddata extends PopulateClassEvent {}
+class EstimateDetailsCount extends PopulateClassEvent {}

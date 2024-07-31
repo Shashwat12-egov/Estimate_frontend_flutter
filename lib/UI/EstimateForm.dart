@@ -32,24 +32,18 @@ class _EstimateFormScreenState extends State<EstimateFormScreen> {
           title: Center(
           child: Text(widget.heading,style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Color.fromARGB(255, 253, 252, 252)),)),
         ),
-        body:BlocBuilder <PopulateClassBloc,PopulateClassState>(
-      buildWhen: (previous,current)=> previous.isValid!=current.isValid,
-        builder: (context, state) {
-          return SingleChildScrollView(
+        body:const SingleChildScrollView(
             child: Column(
               children: [
-                const FormTextField("Tenant Id","e.g. pb.amritsar","Estimate"),
-                const FormTextField("Revision Number","e.g. EST/2022-23/010-001","Estimate"),
-                const FormTextField("Business Service","e.g. ESTIMATE, REVISION-ESTIMATE","Estimate"),
-                const FormTextField("Name", "e.g. Construct new schools","Estimate"),
-                const FormTextField("Reference Number", "e.g. File-18430283","Estimate"),
-                state.isValid ? const Text(""): const Text("Fill the required details...",style: TextStyle(fontWeight: FontWeight.bold),)
+                FormTextField("Tenant Id","e.g. pb.amritsar","Estimate",true),
+                FormTextField("Revision Number","e.g. EST/2022-23/010-001","Estimate",true),
+                FormTextField("Business Service","e.g. ESTIMATE, REVISION-ESTIMATE","Estimate",false),
+                FormTextField("Name", "e.g. Construct new schools","Estimate",false),
+                FormTextField("Reference Number", "e.g. File-18430283","Estimate",false),
               ],
             ),
-          );
-        }
-      ),
-      bottomNavigationBar: const Primarybuttons("Address Details"),
-    );
+          ),
+           bottomNavigationBar: const Primarybuttons("Address Details"),
+      );
   }
 }

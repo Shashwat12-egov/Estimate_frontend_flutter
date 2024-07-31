@@ -24,11 +24,11 @@ class AddressformScreen extends StatelessWidget {
         body:const SingleChildScrollView(
           child: Column(
             children: [
-              FormTextField("Tenant Id","e.g. pb.amritsar","Address"),
-              FormTextField("Door Number","e.g. String","Address"),
-              FormTextField("Address Line1","e.g. Ejipura","Address"),
-              FormTextField("Address Line2", "e.g. Kormangala","Address"),
-              FormTextField("City", "e.g. Bangalore","Address"),
+              FormTextField("Tenant Id","e.g. pb.amritsar","Address",true),
+              FormTextField("Door Number","e.g. String","Address",true),
+              FormTextField("Address Line1","e.g. Ejipura","Address",false),
+              FormTextField("Address Line2", "e.g. Kormangala","Address",false),
+              FormTextField("City", "e.g. Bangalore","Address",false),
           ],
                 ),
         ),

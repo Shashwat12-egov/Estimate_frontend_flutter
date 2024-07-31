@@ -8,7 +8,7 @@ class MinimizedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Column(
       children: [
-        Cards("Create Estimates", Icon(Icons.expand_more)),
+        Cards("Create Estimates"),
       ],
     );
   }

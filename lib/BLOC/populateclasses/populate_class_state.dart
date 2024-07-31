@@ -2,10 +2,10 @@ part of 'populate_class_bloc.dart';
 
 class PopulateClassState extends Equatable {
   final Estimate estimateData;
-  final bool isValid;
+  final int estdcount;
 
-  const PopulateClassState(this.estimateData,this.isValid);
+  const PopulateClassState(this.estimateData,this.estdcount);
   
   @override
-  List<Object> get props => [estimateData,isValid];
+  List<Object> get props => [estimateData,estdcount];
 }

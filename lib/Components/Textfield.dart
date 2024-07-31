@@ -1,12 +1,11 @@
 import 'package:digit_flutter_components/widgets/atoms/digit_text_form_input.dart';
-// import 'package:estimate_flutter/BLOC/populateclasses/populate_class_bloc.dart';
 import 'package:estimate_flutter/mapping.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FormTextField extends StatelessWidget {
   final String label,helpText,screen;
-  const FormTextField(this.label,this.helpText,this.screen,{super.key});
+  final bool required;
+  const FormTextField(this.label,this.helpText,this.screen,this.required,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +14,7 @@ class FormTextField extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: DigitTextFormInput(
             label: label,
+            isRequired: required,
             controller: TextEditingController(),
             helpText: helpText,
             charCount: true,

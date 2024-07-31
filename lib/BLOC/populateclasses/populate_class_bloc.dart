@@ -12,18 +12,18 @@ part 'populate_class_state.dart';
 class PopulateClassBloc extends Bloc<PopulateClassEvent, PopulateClassState> {
   PopulateClassBloc() : super(PopulateClassState(Estimate(
     estimateDetails: []
-  ),true)) {
+  ),0)) {
     on<SavingEstimateFormData>(_savingEstimateFormData);
     on<SavingAddressFormData>(_savingAddressFormData);
     on<SavingEstimateDetailsFormData>(_savingEstimateDetailsFormData);
     on<SendingDatatoBackend>(_sendingDatatoBackend);
-    on<IsValiddata>(_isValiddata);
+    on<EstimateDetailsCount>(_estimateDetailsCount);
   }
 
   void _savingEstimateFormData(SavingEstimateFormData event, Emitter<PopulateClassState> emit) {
     // Estimate estimate;
     Estimate estimate=Estimate.fromJson(globalEstimate);
-    emit(PopulateClassState(estimate,state.isValid));
+    emit(PopulateClassState(estimate,state.estdcount));
   }
 
   void _savingAddressFormData(SavingAddressFormData event, Emitter<PopulateClassState> emit) {
@@ -31,7 +31,7 @@ class PopulateClassBloc extends Bloc<PopulateClassEvent, PopulateClassState> {
     Address address=Address.fromJson(globalAddress);
     Estimate estimate=state.estimateData;
     estimate.address=address;
-    emit(PopulateClassState(estimate,state.isValid));
+    emit(PopulateClassState(estimate,state.estdcount));
   }
 
    void _savingEstimateDetailsFormData(SavingEstimateDetailsFormData event, Emitter<PopulateClassState> emit) {
@@ -40,7 +40,7 @@ class PopulateClassBloc extends Bloc<PopulateClassEvent, PopulateClassState> {
     Estimate estimate=state.estimateData;
     estimate.estimateDetails ??= [];
     estimate.estimateDetails?.add(estimateDetail);
-    emit(PopulateClassState(estimate,state.isValid));
+    emit(PopulateClassState(estimate,state.estdcount));
   }
 
   void _sendingDatatoBackend(SendingDatatoBackend event, Emitter<PopulateClassState> emit) async {
@@ -83,7 +83,7 @@ class PopulateClassBloc extends Bloc<PopulateClassEvent, PopulateClassState> {
     }
   }
 
-  void _isValiddata(IsValiddata event, Emitter<PopulateClassState> emit) {
-    emit(PopulateClassState(state.estimateData,!state.isValid));
+  void _estimateDetailsCount(EstimateDetailsCount event, Emitter<PopulateClassState> emit) {
+    emit(PopulateClassState(state.estimateData,state.estdcount+1));
   }
 }
