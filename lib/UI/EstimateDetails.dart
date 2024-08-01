@@ -3,16 +3,10 @@ import 'package:digit_flutter_components/enum/app_enums.dart';
 import 'package:digit_flutter_components/theme/digit_theme.dart';
 import 'package:digit_flutter_components/widgets/atoms/digit_button.dart';
 import 'package:estimate_flutter/BLOC/populateclasses/populate_class_bloc.dart';
-import 'package:estimate_flutter/Components/Addbutton.dart';
-// import 'package:estimate_flutter/Components/Addbutton.dart';
-// import 'package:estimate_flutter/Components/Cards.dart';
-import 'package:estimate_flutter/Components/PrimaryButtons.dart';
-import 'package:estimate_flutter/Components/TextArea.dart';
 import 'package:estimate_flutter/Components/Textfield.dart';
 import 'package:estimate_flutter/Utils/app_router.gr.dart';
 import 'package:estimate_flutter/mapping.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -51,33 +45,45 @@ class _EstimatedetailsScreenState extends State<EstimatedetailsScreen> {
         value: '', // Initial value
         // ignore: dead_code
         validators: false ? [Validators.required] : [],
-      ),
-      'Description': FormControl<String>(
-        value: '', // Initial value
-        // ignore: dead_code
-        validators: false ? [Validators.required] : [],
-      ),
+      )
     });
   }
 
-  void _onFormSubmit() {
+   void _onFormSubmit() {
+    final blocdata=context.read <PopulateClassBloc>();
+    final estimateDetailscount=blocdata.state.estimateData.estimateDetails?.length;
+
+    if(estimateDetailscount==0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+              'Click on Add button to add details'),
+          duration: Duration(
+              seconds:
+                  2), // The duration for which the snackbar is displayed
+        ),
+      );
+    }
+    else {
+      AutoRouter.of(context).push(PreviewRoute(heading: "Preview"));
+    }
+  }
+
+  void _onAdd() {
     if (form.valid) {
       // Access the value from the form
-      final String tenantId= form.control('Tenant Id').value;
-      final String revisionNumber= form.control('Door Number').value;
-      final String name= form.control('Address Line1').value;
-      final String referenceNumber= form.control('Address Line2').value;
-      final String businessService= form.control('City').value;
+      final String sorId= form.control('sorId').value;
+      final String category= form.control('Category').value;
+      final String name= form.control('Name').value;
+      final String uom= form.control('uom').value;
 
-      globalAddress["tenantId"]=tenantId;
-      globalAddress["doorNo"]=revisionNumber;
-      globalAddress["addressLine1"]=name;
-      globalAddress["addressLine2"]=referenceNumber;
-      globalAddress["city"]=businessService;
+      globalEstimateDetails["sorId"]=sorId;
+      globalEstimateDetails["name"]=name;
+      globalEstimateDetails["category"]=category;
+      globalEstimateDetails["uom"]=uom;
 
-      print(globalAddress);
-    context.read <PopulateClassBloc>().add(SavingAddressFormData());
-    AutoRouter.of(context).push(EstimatedetailsRoute(heading: "Estimate Details"));
+      context.read <PopulateClassBloc>().add(EstimateDetailsCount());
+      context.read <PopulateClassBloc>().add(SavingEstimateDetailsFormData());
     } else {
       form.markAllAsTouched();
     }
@@ -107,10 +113,13 @@ class _EstimatedetailsScreenState extends State<EstimatedetailsScreen> {
                   const FormTextField("Name","e.g. Estimate Details"),
                   const FormTextField("Category","e.g. Overhead, SOR, non-SOR"),
                   const FormTextField("uom", "e.g. Kilogram, meter, number"),
-                  const FormTextArea("Description", "e.g. text","Estimate Details"),
                   Container(
                     margin: const EdgeInsets.all(20),
-                    child: const Addbutton("Add", "Estimate Details")
+                    child: DigitButton(
+                        onPressed: _onAdd,
+                        label: 'Add',
+                        type: ButtonType.primary,
+                      )
                   ),
                   Text("Added Estimate Details: ${state.estdcount}")
                 ],

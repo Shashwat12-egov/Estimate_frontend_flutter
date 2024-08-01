@@ -31,7 +31,8 @@ class PopulateClassBloc extends Bloc<PopulateClassEvent, PopulateClassState> {
     Address address=Address.fromJson(globalAddress);
     Estimate estimate=state.estimateData;
     estimate.address=address;
-    emit(PopulateClassState(estimate,state.estdcount));
+    estimate.estimateDetails=[];
+    emit(PopulateClassState(estimate,0));
   }
 
    void _savingEstimateDetailsFormData(SavingEstimateDetailsFormData event, Emitter<PopulateClassState> emit) {
